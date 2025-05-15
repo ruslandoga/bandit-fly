@@ -52,29 +52,8 @@ defmodule BanditFly do
   end
 
   def hey(conn, _opts) do
-    conn =
-      conn
-      |> put_resp_header("content-type", "text/plain")
-      |> send_chunked(200)
-
-    {:ok, _conn} = chunk(conn, "Hey from Bandit, Fly!\n\n")
-    :timer.sleep(5000)
-    {:ok, _conn} = chunk(conn, "conn")
-    :timer.sleep(5000)
-    {:ok, _conn} = chunk(conn, "\n\n")
-    :timer.sleep(5000)
-    {:ok, _conn} = chunk(conn, inspect(conn))
-    :timer.sleep(5000)
-    {:ok, _conn} = chunk(conn, "\n\n")
-    :timer.sleep(5000)
-    {:ok, _conn} = chunk(conn, "env")
-    :timer.sleep(5000)
-    {:ok, _conn} = chunk(conn, "\n\n")
-    :timer.sleep(5000)
-    {:ok, _conn} = chunk(conn, inspect(System.get_env()))
-    :timer.sleep(5000)
-    {:ok, _conn} = chunk(conn, "\n\n")
-
     conn
+    |> put_resp_header("content-type", "text/plain")
+    |> send_resp(200, "Hey from Bandit, Fly!\n\n")
   end
 end
